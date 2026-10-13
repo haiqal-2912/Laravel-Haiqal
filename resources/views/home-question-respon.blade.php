@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Terima Kasih</title>
@@ -49,24 +50,33 @@
         }
     </style>
 </head>
+
 <body>
 
-    <div class="thankyou-container">
-        <h2>Terima Kasih, {{$nama}} 🎉</h2>
-        <p class="lead">Pertanyaan Anda telah berhasil dikirim.</p>
+<div class="thankyou-container">
 
-        <blockquote>
-            <strong>Pertanyaan Anda:</strong><br>
-            "{{$pertanyaan}}"
-        </blockquote>
+    <!-- PESAN SUKSES DARI CONTROLLER -> WITH('INFO', ...) -->
+    @if(session('info'))
+        <div class="alert alert-success" style="padding: 12px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; border-radius: 8px; margin-bottom: 20px; text-align: center; font-weight: bold;">
+            {{ session('info') }}
+        </div>
+    @endif
 
-        <p class="email-info mt-4">
-            Pertanyaan Anda akan segera kami tanggapi dan balas melalui email <strong>{{$email}}</strong>.<br><br>
-            Mohon cek kotak masuk atau folder spam Anda secara berkala.
-        </p>
+    <h2>Terima Kasih, {{ session('nama') }} 📣</h2>
+    <p class="lead">Pertanyaan Anda telah berhasil dikirim.</p>
 
-        <a href="{{ url('/') }}" class="btn btn-primary mt-4">Kembali ke Beranda</a>
-    </div>
+    <blockquote>
+        <strong>Pertanyaan Anda:</strong><br>
+        "{{ session('pertanyaan') }}"
+    </blockquote>
+
+    <p class="email-info mt-4">
+        Pertanyaan Anda akan segera kami tanggapi dan balas melalui email
+        <strong>{{ session('email') }}</strong>.<br><br>
+        Mohon cek kotak masuk atau folder spam Anda secara berkala.
+    </p>
+</div>
 
 </body>
+
 </html>

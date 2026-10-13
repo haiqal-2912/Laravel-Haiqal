@@ -14,3 +14,10 @@ Route::post('question/store', [QuestionController::class, 'store'])
 		->name('question.store');
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+// Route untuk mengirim data dari form
+Route::post('/kirim-jawaban', [QuestionController::class, 'store']);
+
+// Route halaman tujuan tempat data ditampilkan
+Route::get('/home-question-respon', function () {
+    return view('home-question-respon');
+});

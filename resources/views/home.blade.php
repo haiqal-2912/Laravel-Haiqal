@@ -161,6 +161,13 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
+
+                        @if (session('info'))
+                            <div class="alert alert-info">
+                                {!! session('info') !!}
+                            </div>
+                        @endif
+                        
                         <h5 class="card-title">Form Pertanyaan</h5>
 
                         <form action="{{ route('question.store') }}" method="POST">
@@ -244,7 +251,8 @@
                             </table>
                         </div>
                         <p class="text-muted small mb-0">Tambahkan <code>.table-striped</code> atau
-                            <code>.table-bordered</code> sesuai kebutuhan.</p>
+                            <code>.table-bordered</code> sesuai kebutuhan.
+                        </p>
                     </div>
                 </div>
             </div>
