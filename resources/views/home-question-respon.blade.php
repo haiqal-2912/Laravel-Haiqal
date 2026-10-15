@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Terima Kasih</title>
@@ -49,24 +50,30 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="thankyou-container">
-        <h2>Terima Kasih, {{$nama}} 🎉</h2>
+
+
+        <!-- 2. Menampilkan Data yang Dikirim dari Form -->
+        @if (session('data'))
+
+        <h2>Terima Kasih, {{ session('data')['nama'] }}📣</h2>
         <p class="lead">Pertanyaan Anda telah berhasil dikirim.</p>
 
         <blockquote>
             <strong>Pertanyaan Anda:</strong><br>
-            "{{$pertanyaan}}"
+            "{{ session('data')['pertanyaan'] }}"
         </blockquote>
 
         <p class="email-info mt-4">
-            Pertanyaan Anda akan segera kami tanggapi dan balas melalui email <strong>{{$email}}</strong>.<br><br>
+            Pertanyaan Anda akan segera kami tanggapi dan balas melalui email
+            <strong>{{ session('data')['email'] }}</strong>.<br><br>
             Mohon cek kotak masuk atau folder spam Anda secara berkala.
         </p>
-
-        <a href="{{ url('/') }}" class="btn btn-primary mt-4">Kembali ke Beranda</a>
     </div>
-
+    @endif
 </body>
+
 </html>

@@ -25,25 +25,34 @@ class QuestionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(Request $request)
     {
-		$request->validate([
-		    'nama'  => 'required|max:10',
-		    'email' => ['required','email'],
-		    'pertanyaan' => 'required|max:300|min:8',
-		], [
-		    'nama.required' => 'Nama Tidak Boleh Kosong',
-		    'email.email' => 'Format Email Tidak Valid',
-		]);
+        $data = [
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'pertanyaan' => $request->pertanyaan,
+        ];
 
-        $data['nama'] = $request->nama;
-        $data['email'] = $request->email;
-        $data['pertanyaan'] = $request->pertanyaan;
+        // Simpan data & pesan ke dalam Session
+        session()->put('data_pertanyaan', $data);
+        session()->flash('info', 'Data Berhasil Dimasukkan !');
 
+        return redirect('/home');
+    }
+    public function respon()
+    {
+        // Ambil data dari session
+        $data = session('data_pertanyaan');
+
+        // Jika tidak ada data, kembalikan ke /home
+        if (!$data) {
+            return redirect('/home');
+        }
+
+        // Tampilkan view beserta datanya
         return view('home-question-respon', $data);
     }
-
-
     public function show(string $id)
     {
         //

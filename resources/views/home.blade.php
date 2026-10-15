@@ -161,16 +161,30 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
+
+                        @if(session('info'))
+                        <div class="alert alert-success" style="padding: 15px; background-color: #d4edda; color: #155724; border-radius: 5px; margin: 15px 0;">
+                            {{ session('info') }}
+                        </div>
+
+                        <!-- Pindah ke /home-question-respon setelah 2,5 detik -->
+                        <script>
+                            setTimeout(function() {
+                                window.location.href = "{{ url('/home-question-respon') }}";
+                            }, 2500);
+                        </script>
+                        @endif
+
                         <h5 class="card-title">Form Pertanyaan</h5>
-                        
+
                         @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                    <li>{{$error}}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{$error}}</li>
+                                @endforeach
+                            </ul>
+                        </div>
                         @endif
 
                         <form action="{{ route('question.store') }}" method="POST">
@@ -254,7 +268,8 @@
                             </table>
                         </div>
                         <p class="text-muted small mb-0">Tambahkan <code>.table-striped</code> atau
-                            <code>.table-bordered</code> sesuai kebutuhan.</p>
+                            <code>.table-bordered</code> sesuai kebutuhan.
+                        </p>
                     </div>
                 </div>
             </div>
