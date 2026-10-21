@@ -163,11 +163,11 @@
                     <div class="card-body">
 
                         @if(session('info'))
-                        <div class="alert alert-success" style="padding: 15px; background-color: #d4edda; color: #155724; border-radius: 5px; margin: 15px 0;">
+                        <div class="alert alert-success" style="padding: 15px; background-color: #d4edda;
+                         color: #155724; border-radius: 5px; margin: 15px 0;">
                             {{ session('info') }}
                         </div>
 
-                        <!-- Pindah ke /home-question-respon setelah 2,5 detik -->
                         <script>
                             setTimeout(function() {
                                 window.location.href = "{{ url('/home-question-respon') }}";

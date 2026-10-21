@@ -34,7 +34,6 @@ class QuestionController extends Controller
             'pertanyaan' => $request->pertanyaan,
         ];
 
-        // Simpan data & pesan ke dalam Session
         session()->put('data_pertanyaan', $data);
         session()->flash('info', 'Data Berhasil Dimasukkan !');
 
@@ -42,15 +41,11 @@ class QuestionController extends Controller
     }
     public function respon()
     {
-        // Ambil data dari session
         $data = session('data_pertanyaan');
 
-        // Jika tidak ada data, kembalikan ke /home
         if (!$data) {
             return redirect('/home');
         }
-
-        // Tampilkan view beserta datanya
         return view('home-question-respon', $data);
     }
     public function show(string $id)

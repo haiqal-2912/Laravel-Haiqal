@@ -52,28 +52,22 @@
 </head>
 
 <body>
-
     <div class="thankyou-container">
-
-
-        <!-- 2. Menampilkan Data yang Dikirim dari Form -->
-        @if (session('data'))
-
-        <h2>Terima Kasih, {{ session('data')['nama'] }}📣</h2>
+        <h2>Terima Kasih, {{ $nama }} 📣</h2>
         <p class="lead">Pertanyaan Anda telah berhasil dikirim.</p>
 
         <blockquote>
             <strong>Pertanyaan Anda:</strong><br>
-            "{{ session('data')['pertanyaan'] }}"
+            "{{ $pertanyaan }}"
         </blockquote>
 
         <p class="email-info mt-4">
             Pertanyaan Anda akan segera kami tanggapi dan balas melalui email
-            <strong>{{ session('data')['email'] }}</strong>.<br><br>
+            <strong>{{ $email }}</strong>.<br><br>
             Mohon cek kotak masuk atau folder spam Anda secara berkala.
         </p>
-    </div>
-    @endif
-</body>
 
+        <a href="{{ url('/home') }}" class="btn btn-primary mt-3">Kembali ke Home</a>
+    </div>
+</body>
 </html>
