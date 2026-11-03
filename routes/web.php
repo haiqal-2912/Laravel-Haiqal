@@ -3,8 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PelangganController;
-
-use App\Http\Controllers\tesController;
+use App\Http\Controllers\UserController;
 
 use App\Http\Controllers\PengalamanController;
 use App\Http\Controllers\ProfilController;
@@ -30,8 +29,7 @@ Route::get('/home-question-respon', [QuestionController::class, 'respon']);
 
 Route::resource('pelanggan', PelangganController::class);
 
-
-Route::resource('tes', tesController::class);
+Route::resource('user', UserController::class);
 
 Route::get('/', function () {
     return view('cv', [
