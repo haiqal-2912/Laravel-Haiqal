@@ -6,26 +6,21 @@ use Illuminate\Http\Request;
 
 class PelangganController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+    public function index(Request $request)
     {
-        $data['dataPelanggan'] = Pelanggan::paginate(10);
-        return view('admin.pelanggan.index', $data);
+        $filterableColumns = ['gender'];
+        $pageData['dataPelanggan'] = Pelanggan::filter($request,$filterableColumns)->paginate(10);
+        return view('admin.pelanggan.index', $pageData);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         return view('admin.pelanggan.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
         //dd($request->all());
@@ -43,25 +38,19 @@ class PelangganController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(string $id)
     {
         $data['dataPelanggan'] = Pelanggan::findOrFail($id);
         return view('admin.pelanggan.edit', $data);
     }
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, string $id)
     {
         $pelanggan_id          = $id;
@@ -76,9 +65,7 @@ class PelangganController extends Controller
         return redirect()->route('pelanggan.index')->with('success', 'Perubahan Data Berhasil!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(string $id)
     {
         $pelanggan = Pelanggan::findOrFail($id);
