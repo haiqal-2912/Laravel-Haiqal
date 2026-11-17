@@ -3,14 +3,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Pelanggan;
 use Illuminate\Http\Request;
-
 class PelangganController extends Controller
 {
 
     public function index(Request $request)
     {
         $filterableColumns = ['gender'];
-        $pageData['dataPelanggan'] = Pelanggan::filter($request,$filterableColumns)->paginate(10);
+
+       $searchableColumns = ['first_name','last_name','email'];
+
+        $pageData['dataPelanggan'] = Pelanggan::filter($request,$filterableColumns)
+                                    ->search($request,$searchableColumns)
+                                    ->paginate(10)->withQueryString();
         return view('admin.pelanggan.index', $pageData);
     }
 
