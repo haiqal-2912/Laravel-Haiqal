@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController;
 
 use App\Http\Controllers\PengalamanController;
 use App\Http\Controllers\ProfilController;
@@ -23,7 +24,7 @@ Route::get('/home', [HomeController::class, 'index']);
 Route::post('question/store', [QuestionController::class, 'store'])
     ->name('question.store');
 
-Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('/home-question-respon', [QuestionController::class, 'respon']);
 
@@ -31,13 +32,13 @@ Route::resource('pelanggan', PelangganController::class);
 
 Route::resource('user', UserController::class);
 
-Route::get('/', function () {
-    return view('cv', [
-        'profil'     => Profil::first(),
-        'pengalaman' => Pengalaman::orderByDesc('tahun_mulai')->get(),
-        'skills'     => Skill::orderBy('kategori')->get()->groupBy('kategori'),
-    ]);
-})->name('cv');
+// Route::get('/', function () {
+//     return view('cv', [
+//         'profil'     => Profil::first(),
+//         'pengalaman' => Pengalaman::orderByDesc('tahun_mulai')->get(),
+//         'skills'     => Skill::orderBy('kategori')->get()->groupBy('kategori'),
+//     ]);
+// })->name('cv');
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('pengalaman', PengalamanController::class)->except('show');
@@ -53,4 +54,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('pengalaman', PengalamanController::class)->except('show');
     Route::resource('skill', SkillController::class)->except('show');
 });
+
+Route::get('/login', [AuthController::class, 'index'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
+Route::post('/logout', [AuthController::class, 'logout'])
+    ->middleware('auth')
+    ->name('auth.logout');
+
 
