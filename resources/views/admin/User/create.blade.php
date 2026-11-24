@@ -61,6 +61,19 @@
                                 </div>
 
                                 <div class="mb-3">
+                                    <label for="role" class="form-label">Role</label>
+                                    <select id="role" name="role" class="form-control @error('role') is-invalid @enderror" required>
+                                        <option value="">Pilih Role</option>
+                                        <option value="admin" {{ old('role') == 'Super Admin' ? 'selected' : '' }}>Super Admin</option>
+                                        <option value="mitra" {{ old('role') == 'Mitra' ? 'selected' : '' }}>Mitra</option>
+                                        <option value="user" {{ old('role') == 'Pelanggan' ? 'selected' : '' }}>Pelanggan</option>
+                                    </select>
+                                    @error('role')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
                                     <label for="password" class="form-label">Password</label>
                                     <input type="password" id="password" name="password"
                                         class="form-control @error('password') is-invalid @enderror" required>

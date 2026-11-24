@@ -32,6 +32,7 @@ class UserController extends Controller
         'name'     => 'required|string|max:100',
         'email'    => 'required|email|unique:users,email',
         'password' => 'required|min:8|confirmed',
+        'role'     => 'required|string|max:50',
     ], [
         'name.required'      => 'Nama wajib diisi.',
         'name.max'           => 'Nama maksimal 100 karakter.',
@@ -74,8 +75,9 @@ class UserController extends Controller
 
     $validated = $request->validate([
         'name'     => 'required|string|max:100',
-        'email'    => ['required', 'email', Rule::unique('users', 'email')->ignore($user->id)],
+        'email'    => ['required', 'email'],
         'password' => 'nullable|min:8|confirmed',   // boleh kosong saat edit
+        'role'     => 'required|string|max:50',
     ], [
         'name.required'      => 'Nama wajib diisi.',
         'name.max'           => 'Nama maksimal 100 karakter.',
